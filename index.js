@@ -6,6 +6,8 @@ const path = require('path');
 const conn = require('./db/conn');
 const User = require('./models/User');
 const Address = require('./models/Address');
+const { format } = require('date-fns');
+const { ptBR } = require('date-fns/locale');
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -13,6 +15,17 @@ const PORT = process.env.PORT || 3000;
 // Configuração do Handlebars
 app.engine('handlebars', exphbs.engine({
   defaultLayout: 'main',
+  helpers: {
+    formatDate: (date) => {
+      if (!date) return '';
+      try {
+        return format(new Date(date), "dd/MM/yyyy HH:mm", { locale: ptBR });
+      } catch (err) {
+        console.error('Erro ao formatar data:', err);
+        return new Date(date).toLocaleString('pt-BR');
+      }
+    }
+  },
   runtimeOptions: {
     allowProtoPropertiesByDefault: true,
     allowProtoMethodsByDefault: true,

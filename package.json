@@ -26,6 +26,7 @@
   },
   "homepage": "https://github.com/HeitorCarvalhoCampos/Projeto-Sequelize-MySQL#readme",
   "dependencies": {
+    "date-fns": "^4.1.0",
     "express": "^5.1.0",
     "express-handlebars": "^8.0.3",
     "handlebars": "^4.7.8",
